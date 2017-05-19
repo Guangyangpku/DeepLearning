@@ -1,12 +1,7 @@
-
-# coding: utf-8
-
-# In[5]:
-
 # These are all the modules we'll be using later. Make sure you can import them
 # before proceeding further.
 from __future__ import print_function
-import matplotlib.pyplot as plt
+import matplotlib as plt
 import numpy as np
 import os
 import sys
@@ -16,12 +11,6 @@ from scipy import ndimage
 from sklearn.linear_model import LogisticRegression
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
-
-# Config the matplotlib backend as plotting inline in IPython
-get_ipython().magic('matplotlib inline')
-
-
-# In[11]:
 
 url = 'http://commondatastorage.googleapis.com/books1000/'
 last_percent_reported = None
@@ -63,8 +52,6 @@ train_filename = maybe_download('notMNIST_large.tar.gz', 247336696)
 test_filename = maybe_download('notMNIST_small.tar.gz', 8458043)
 
 
-# In[16]:
-
 num_classes = 10
 np.random.seed(133)
 
@@ -92,8 +79,6 @@ def maybe_extract(filename, force=False):
 train_folders = maybe_extract(train_filename)
 test_folders = maybe_extract(test_filename)
 
-
-# In[17]:
 
 image_size = 28  # Pixel width and height.
 pixel_depth = 255.0  # Number of levels per pixel.
@@ -149,8 +134,6 @@ def maybe_pickle(data_folders, min_num_images_per_class, force=False):
 train_datasets = maybe_pickle(train_folders, 45000)
 test_datasets = maybe_pickle(test_folders, 1800)
 
-
-# In[22]:
 
 def make_arrays(nb_rows, img_size):
   if nb_rows:
@@ -208,8 +191,6 @@ print('Validation:', valid_dataset.shape, valid_labels.shape)
 print('Testing:', test_dataset.shape, test_labels.shape)
 
 
-# In[23]:
-
 def randomize(dataset, labels):
   permutation = np.random.permutation(labels.shape[0])
   shuffled_dataset = dataset[permutation,:,:]
@@ -220,7 +201,6 @@ test_dataset, test_labels = randomize(test_dataset, test_labels)
 valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
 
 
-# In[26]:
 
 pickle_file = os.path.join(data_root, 'notMNIST.pickle')
 
@@ -241,13 +221,10 @@ except Exception as e:
   raise
 
 
-# In[27]:
-
 statinfo = os.stat(pickle_file)
 print('Compressed pickle size:', statinfo.st_size)
 
 
-# In[ ]:
 
 
 
